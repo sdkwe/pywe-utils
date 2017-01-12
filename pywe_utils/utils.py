@@ -1,16 +1,38 @@
 # -*- coding: utf-8 -*-
 
-import requests
+from __future__ import unicode_literals
+
+import six
 
 
-class WechatUtils(object):
-    def __init__(self):
-        self.API_DOMAIN = 'https://api.weixin.qq.com'
-        self.OPEN_DOMAIN = 'https://open.weixin.qq.com'
+__all__ = ['to_binary', 'to_text']
 
-    def get(self, url, verify=False, **kwargs):
-        # When ``verify=True`` and ``cacert.pem`` not match ``https://xxx.weixin.qq.com``, will raise
-        # SSLError: [Errno 1] _ssl.c:510: error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
-        res = requests.get(url.format(**kwargs), verify=verify)
-        res.encoding = 'utf-8'
-        return res.json()
+
+def to_binary(value, encoding='utf-8'):
+    """Convert value to binary string, default encoding is utf-8
+
+    :param value: Value to be converted
+    :param encoding: Desired encoding
+    """
+    if not value:
+        return b''
+    if isinstance(value, six.binary_type):
+        return value
+    if isinstance(value, six.text_type):
+        return value.encode(encoding)
+    return six.binary_type(value)
+
+
+def to_text(value, encoding='utf-8'):
+    """Convert value to unicode, default encoding is utf-8
+
+    :param value: Value to be converted
+    :param encoding: Desired encoding
+    """
+    if not value:
+        return ''
+    if isinstance(value, six.text_type):
+        return value
+    if isinstance(value, six.binary_type):
+        return value.decode(encoding)
+    return six.text_type(value)

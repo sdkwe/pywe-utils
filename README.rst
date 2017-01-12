@@ -17,22 +17,14 @@ Usage
 
 ::
 
-    In [1]: from pywe_utils import WechatUtils
+    from pywe_utils import to_binary, to_text
 
-    In [7]: class XXX(WechatUtils):
-       ...:     pass
-       ...:
 
-    In [3]: xxx = XXX()
+Method
+======
 
-    In [4]: xxx.API_DOMAIN
-    Out[4]: 'https://api.weixin.qq.com'
+::
 
-    In [5]: xxx.OPEN_DOMAIN
-    Out[5]: 'https://open.weixin.qq.com'
+    def to_binary(value, encoding='utf-8'):
 
-    In [6]: xxx._requests
-    Out[6]: <bound method XXX._requests of <__main__.XXX object at 0x7f9248260d10>>
-
-    In [7]:
-
+    def to_text(value, encoding='utf-8'):
