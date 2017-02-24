@@ -2,10 +2,13 @@
 
 from __future__ import unicode_literals
 
+import random
+import string
+
 import six
 
 
-__all__ = ['to_binary', 'to_text']
+__all__ = ['to_binary', 'to_text', 'random_string']
 
 
 def to_binary(value, encoding='utf-8'):
@@ -36,3 +39,9 @@ def to_text(value, encoding='utf-8'):
     if isinstance(value, six.binary_type):
         return value.decode(encoding)
     return six.text_type(value)
+
+
+def random_string(length=16):
+    rule = string.ascii_letters + string.digits
+    rand_list = random.sample(rule, length)
+    return ''.join(rand_list)
